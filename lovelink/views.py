@@ -60,9 +60,9 @@ def personId(request):
 def personInfoIn(request):
     if(request.method == 'POST'):
 
-        print(request.environ)
-        for k, v in request.environ.items():
-            print(k,v)
+        # print(request.environ)
+        # for k, v in request.environ.items():
+        #     print(k,v)
 
         concat = request.POST
         text = concat['username'] + ': ' + concat['text']
@@ -72,12 +72,12 @@ def personInfoIn(request):
                 username=concat['username'],
                 text=concat['text'],
                 oathTitle=concat['oathTitle'],
-                blockNum=concat['blockNum'],
+                # blockNum=concat['blockNum'],
                 image=concat['image'],
                 time=concat['time'],
                 avatarUrl=concat['avatarUrl'],
                 openid=concat['openid'],
-                tx_hash='none'
+                # tx_hash='none'
             )
         ]
         resultList = db.update(docs)
