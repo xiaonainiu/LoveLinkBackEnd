@@ -44,6 +44,7 @@ def personId(request):
         print('=====start=====')
         concat = request.POST
         code = concat['code']
+        print('code: '+code)
         appid = 'wx04c066bae099852d'
         secret = 'ba56b017bb62f22f2de6a5f3b9171679'
         requestString = 'https://api.weixin.qq.com/sns/jscode2session?appid={APPID}&secret={SECRET}&js_code={JSCODE}&grant_type=authorization_code'.format(
@@ -51,10 +52,7 @@ def personId(request):
         r = requests.get(requestString)
         r = r.json()
         openid = r['openid']
-        print('code: '+code)
         print('openid: '+openid)
-        print(type(openid))
-        # openid = 'idddd'
         print('=====end=====')
         return HttpResponse(openid)
     return HttpResponse(False)
