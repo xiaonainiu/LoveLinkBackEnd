@@ -49,10 +49,13 @@ def personId(request):
             APPID=appid, SECRET=secret, JSCODE=code)
         r = requests.get(requestString)
         r = r.json()
-        print(r['openid'])
-        print(r['session_key'])
+        openid = r['openid']
+        print('code: '+code)
+        print('openid: '+openid)
+        print(type(openid))
+        # openid = 'idddd'
         print('=====end=====')
-        return r['openid']
+        return HttpResponse(openid)
     return HttpResponse(False)
 @csrf_exempt
 def personInfoIn(request):
