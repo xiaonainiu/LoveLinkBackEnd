@@ -40,9 +40,10 @@ def textIn(request):
 
 @csrf_exempt
 def personId(request):
-    if(request.method == 'GET'):
+    if(request.method == 'POST'):
         print('=====start=====')
-        code = request.environ['HTTP_CODE']
+        concat = request.POST
+        code = concat['code']
         appid = 'wx04c066bae099852d'
         secret = 'ba56b017bb62f22f2de6a5f3b9171679'
         requestString = 'https://api.weixin.qq.com/sns/jscode2session?appid={APPID}&secret={SECRET}&js_code={JSCODE}&grant_type=authorization_code'.format(
