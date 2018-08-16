@@ -96,16 +96,16 @@ def personInfoIn(request):
 @csrf_exempt
 def personInfoOut(request):
     if(request.method == 'POST'):
-
-        print(request.environ)
-        for k, v in request.environ.items():
-            print(k,v)
-
+        # print(request.environ)
+        # for k, v in request.environ.items():
+        #     print(k,v)
+        print('=====personInfoOut start=====')
         concat = request.POST
         results = db.view('byWechetId/byWechetId', keys=[concat['username']])
         for row in results:
             dic = row.value
             print(dic)
+        print('=====personInfoOut end=====')
         return HttpResponse(results)
     else:
         return HttpResponse(False)
