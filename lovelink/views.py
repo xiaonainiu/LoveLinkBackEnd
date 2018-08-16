@@ -14,7 +14,7 @@ import couchdb
 
 
 # Define couch db
-server = couchdb.Server('http://admin:admin@localhost:5984')
+server = couchdb.Server('http://localhost:5984')
 db = server['lovechain_test']
 
 def index(request):
