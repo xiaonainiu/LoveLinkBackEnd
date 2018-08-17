@@ -189,7 +189,7 @@ def prepay(openid):
         'spbill_create_ip': '127.0.0.1',  # APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP
         'notify_url': ' http://www.weixin.qq.com/wxpay/pay.php',  # 异步接收微信支付结果通知的回调地址，通知url必须为外网可访问的url，不能携带参数
         'trade_type': 'JSAPI',
-        'total_fee': '520',
+        'total_fee': '1',
         # 'openid': 'o8oBc5SsQBOsISB00O81BTRnq2VM'  # （测试数据）实际从前端传过来
         'openid' : openid,
     }
