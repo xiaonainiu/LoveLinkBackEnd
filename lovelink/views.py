@@ -7,8 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 import couchdb
 
 ##web3
-# from web3 import Web3
-# from eth_account import Account
+from web3 import Web3
+from eth_account import Account
 
 ##Payment
 import random
@@ -40,11 +40,16 @@ def textIn(request):
 @csrf_exempt
 def prepayId(request):
     if (request.method == 'POST'):
-        print('=====start=====')
+        print('=====prepay start=====')
         concat = request.POST
         openid = concat['openid']
         data = prepay(openid)
-        return HttpResponse(data)
+        # print(type(data))
+        data_json = json.dumps(data)
+        # print(type(data_json))
+        print(data_json)
+        print('=====prepay start=====')
+        return HttpResponse(data_json)
     return HttpResponse(False)
 #
 # @csrf_exempt
@@ -119,27 +124,27 @@ def personInfoOut(request):
     else:
         return HttpResponse(False)
 
-# def transction(text):
-#   w3=Web3(Web3.HTTPProvider('https://mainnet.infura.io/9dhHYFuxJixnXwEdnwIy '))#连接到Eth的远程节点
-#   priv_key = '5a71be5b4d5bea28a3b841f5f6a7a7a14b077cff3a82b9a02d738145a157c2fb' #爱链的eth账户的私钥
-#   account = Account.privateKeyToAccount(priv_key) #通过私钥得到公钥也就是账户地址
-#   nonce = w3.eth.getTransactionCount(account.address) #通过返回指定地址发起的交易数，得到防止重放攻击的数字
-#   data=Web3.toHex(str.encode(text))#交易附加的信息，需要将字符串转换为16进制编码，需要前端传递来需要保存的数据
-#   payload = {
-#     'to': '0x8Fe2Af03Ed1d362371261AB33C400F24fBB82D8f',
-#     'value': 0,
-#     'gas': 200000,           #运算步数的上限
-#     'gasPrice': Web3.toWei(10,'gwei'),#每一步运算耗费的Eth
-#     'nonce': nonce,
-#     'data':data
-#   }
-#   signed = account.signTransaction(payload) #打包
-#   # estimation = w3.eth.estimateGas(payload)
-#   # print(estimation)
-#   tx_hash = w3.eth.sendRawTransaction(signed.rawTransaction)#生成裸交易，得到交易号
-#   # receipt = w3.eth.waitForTransactionReceipt(tx_hash) #通过交易号得到交易的信息，一般需要等1分钟
-#   print('hash: '+tx_hash)
-#   return tx_hash
+def transction(text):
+  w3=Web3(Web3.HTTPProvider('https://mainnet.infura.io/9dhHYFuxJixnXwEdnwIy '))#连接到Eth的远程节点
+  priv_key = '5a71be5b4d5bea28a3b841f5f6a7a7a14b077cff3a82b9a02d738145a157c2fb' #爱链的eth账户的私钥
+  account = Account.privateKeyToAccount(priv_key) #通过私钥得到公钥也就是账户地址
+  nonce = w3.eth.getTransactionCount(account.address) #通过返回指定地址发起的交易数，得到防止重放攻击的数字
+  data=Web3.toHex(str.encode(text))#交易附加的信息，需要将字符串转换为16进制编码，需要前端传递来需要保存的数据
+  payload = {
+    'to': '0x8Fe2Af03Ed1d362371261AB33C400F24fBB82D8f',
+    'value': 0,
+    'gas': 200000,           #运算步数的上限
+    'gasPrice': Web3.toWei(10,'gwei'),#每一步运算耗费的Eth
+    'nonce': nonce,
+    'data':data
+  }
+  signed = account.signTransaction(payload) #打包
+  # estimation = w3.eth.estimateGas(payload)
+  # print(estimation)
+  tx_hash = w3.eth.sendRawTransaction(signed.rawTransaction)#生成裸交易，得到交易号
+  # receipt = w3.eth.waitForTransactionReceipt(tx_hash) #通过交易号得到交易的信息，一般需要等1分钟
+  print('hash: '+tx_hash)
+  return tx_hash
 
 def get_nonce_str():
     string=[]
@@ -207,10 +212,10 @@ def prepay(openid):
     result = urllib.request.urlopen(req, timeout=500).read()
     # print(type(result.decode('utf-8')))
     result = result.decode('utf-8')
-    print(result)
+    # print(result)
     result = re.findall(r"<prepay_id><!\[CDATA\[(.*)]]></prepay_id>", result, re.I | re.M)
     prepay_id = result[0]  # 第一次签名传输到微信服务器获得prepay id
-    print(type(result))
+    # print(type(result))
 
     # 第二次签名，获得paySign
     package = "prepay_id=" + prepay_id
@@ -225,11 +230,11 @@ def prepay(openid):
 
     stringB = '&'.join(["{0}={1}".format(k, data2.get(k)) for k in sorted(data2)])
     stringB = '{0}&key={1}'.format(stringB, merchant_key)
-    print(stringB)
+    # print(stringB)
     stringB = stringB.encode("utf8")
     paySign = hashlib.md5(stringB).hexdigest().upper()
     data2['paySign'] = paySign
-    print(data2)
+    # print(data2)
     # 获得paySign后，加data2字典和paySign一并传输到前端
     return data2
 
