@@ -7,8 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 import couchdb
 
 ##web3
-# from web3 import Web3
-# from eth_account import Account
+from web3 import Web3
+from eth_account import Account
 
 # Create your views here.
 
