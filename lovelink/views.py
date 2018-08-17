@@ -10,6 +10,13 @@ import couchdb
 from web3 import Web3
 from eth_account import Account
 
+##Payment
+import random
+import hashlib
+import urllib.request
+import re
+import time
+
 # Create your views here.
 
 
@@ -31,8 +38,14 @@ def textIn(request):
     return HttpResponse(request.environ['HTTP_TEXT'])
 
 # @csrf_exempt
-# def prepayId(request):
-#     pass
+def prepayId(request):
+    if (request.method == 'POST'):
+        print('=====start=====')
+        concat = request.POST
+        openid = concat['openid']
+        data = prepay(openid)
+        return HttpResponse(data)
+    return HttpResponse(False)
 #
 # @csrf_exempt
 # def repayId(request):
@@ -127,6 +140,100 @@ def transction(text):
   # receipt = w3.eth.waitForTransactionReceipt(tx_hash) #通过交易号得到交易的信息，一般需要等1分钟
   print('hash: '+tx_hash)
   return tx_hash
+
+def get_nonce_str():
+    string=[]
+    for i in range(32):
+        x = random.randint(1, 2)
+        if x == 1:
+            y = str(random.randint(0, 9))
+        else:
+            y = chr(random.randint(97, 122))
+        string += y
+        string = ''.join(string)
+    return string
+
+
+def trans_dict_to_xml(data):
+    """
+    将 dict 对象转换成微信支付交互所需的 XML 格式数据
+
+    :param data: dict 对象
+    :return: xml 格式数据
+    """
+
+    xml = []
+    for k in data.keys():
+        v = data.get(k)
+        if k == 'detail' and not v.startswith('<![CDATA['):
+            v = '<![CDATA[{}]]>'.format(v)
+        xml.append('<{key}>{value}</{key}>'.format(key=k, value=v))
+    return '<xml>{}</xml>'.format(''.join(xml))
+
+# urlopenid='http://localhost:3000/payTest'
+# openid= urllib.request.urlopen(urlopenid).read()
+# print(eval(openid.decode('utf-8'))[-1]['code'])
+
+def prepay(openid):
+    data = {
+        'appid': 'wx04c066bae099852d',
+        'mch_id': '1441169202',
+        'nonce_str': get_nonce_str(),
+        'body': '上链费用',  # 商品描述
+        'out_trade_no': str(int(time.time())),  # 商户订单号
+        'spbill_create_ip': '127.0.0.1',  # APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP
+        'notify_url': ' http://www.weixin.qq.com/wxpay/pay.php',  # 异步接收微信支付结果通知的回调地址，通知url必须为外网可访问的url，不能携带参数
+        'trade_type': 'JSAPI',
+        'total_fee': '520',
+        # 'openid': 'o8oBc5SsQBOsISB00O81BTRnq2VM'  # （测试数据）实际从前端传过来
+        'openid' : openid,
+    }
+    stringA = '&'.join(["{0}={1}".format(k, data.get(k)) for k in sorted(data)])
+    # print(stringA)
+    merchant_key = 'interestact1tink134kaoyan5216tin'
+    stringSignTemp = '{0}&key={1}'.format(stringA, merchant_key)
+    # print(stringSignTemp)
+    stringSignTemp = stringSignTemp.encode("utf8")
+    sign = hashlib.md5(stringSignTemp).hexdigest().upper()
+    data['sign'] = sign
+    # print(data)
+
+    url = 'https://api.mch.weixin.qq.com/pay/unifiedorder'
+
+    data = trans_dict_to_xml(data).encode('utf-8')
+    req = urllib.request.Request(url=url, data=data, method='POST', headers={'Content-Type': 'application/xml'})
+    # print(type(req))
+
+    result = urllib.request.urlopen(req, timeout=500).read()
+    # print(type(result.decode('utf-8')))
+    result = result.decode('utf-8')
+    print(result)
+    result = re.findall(r"<prepay_id><!\[CDATA\[(.*)]]></prepay_id>", result, re.I | re.M)
+    prepay_id = result[0]  # 第一次签名传输到微信服务器获得prepay id
+    print(type(result))
+
+    # 第二次签名，获得paySign
+    package = "prepay_id=" + prepay_id
+    t = time.time()
+    data2 = {
+        'appId': 'wx04c066bae099852d',
+        'timeStamp': int(t),
+        'nonceStr': get_nonce_str(),
+        'package': package,
+        'signType': 'MD5',
+    }
+
+    stringB = '&'.join(["{0}={1}".format(k, data2.get(k)) for k in sorted(data2)])
+    stringB = '{0}&key={1}'.format(stringB, merchant_key)
+    print(stringB)
+    stringB = stringB.encode("utf8")
+    paySign = hashlib.md5(stringB).hexdigest().upper()
+    data2['paySign'] = paySign
+    print(data2)
+    # 获得paySign后，加data2字典和paySign一并传输到前端
+    return data2
+
+
 
 
 
