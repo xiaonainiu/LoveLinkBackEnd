@@ -85,7 +85,7 @@ def personInfoIn(request):
                 print('%s db[%s]' % (item[2], item[1]))
         print('%s update successfully\n' % updateNum)
         print('===has saved===')
-        return HttpResponse('Person Information have saved without pay')
+        return HttpResponse('Person Information have saved, hash code: '+tx_hash)
     else:
         return HttpResponse(False)
 
