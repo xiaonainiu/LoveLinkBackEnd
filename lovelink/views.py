@@ -59,10 +59,10 @@ def prepayId(request):
 @csrf_exempt
 def getKey(request):
     if (request.method == 'POST'):
-        # print('=====getKey start=====')
-        # key = env_dist['BLOCK_KEY']
-        # print (key)
-        # print('=====getKey end=====')
+        print('=====getKey start=====')
+        key = env_dist['BLOCK_KEY']
+        print (key)
+        print('=====getKey end=====')
         return HttpResponse('NONE')
     return HttpResponse(False)
 #
