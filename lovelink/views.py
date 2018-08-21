@@ -5,6 +5,7 @@ import json
 import requests
 from django.views.decorators.csrf import csrf_exempt
 import couchdb
+import os
 
 ##web3
 from web3 import Web3
@@ -23,6 +24,9 @@ import time
 # Define couch db
 server = couchdb.Server('http://localhost:5984')
 db = server['lovechain_test']
+
+# Define os environment
+env_dist = os.environ
 
 def index(request):
     return HttpResponse('Hello,world')
@@ -50,6 +54,16 @@ def prepayId(request):
         print(data_json)
         print('=====prepay start=====')
         return HttpResponse(data_json)
+    return HttpResponse(False)
+
+@csrf_exempt
+def getKey(request):
+    if (request.method == 'POST'):
+        # print('=====getKey start=====')
+        # key = env_dist['BLOCK_KEY']
+        # print (key)
+        # print('=====getKey end=====')
+        return HttpResponse('NONE')
     return HttpResponse(False)
 #
 # @csrf_exempt
@@ -131,7 +145,7 @@ def transction(text):
   nonce = w3.eth.getTransactionCount(account.address) #通过返回指定地址发起的交易数，得到防止重放攻击的数字
   data=Web3.toHex(str.encode(text))#交易附加的信息，需要将字符串转换为16进制编码，需要前端传递来需要保存的数据
   payload = {
-    'to': '0x8Fe2Af03Ed1d362371261AB33C400F24fBB82D8f',
+    'to': env_dist['BLOCK_KEY'],
     'value': 0,
     'gas': 200000,           #运算步数的上限
     'gasPrice': Web3.toWei(10,'gwei'),#每一步运算耗费的Eth

@@ -9,4 +9,5 @@ urlpatterns = [
     path('personInfoOut', views.personInfoOut, name='personInfoOut'),
     path('personId', views.personId, name='personId'),
     path('prepayId',views.prepayId, name='prepayId'),
+    path('getKey',views.getKey, name='getKey'),
 ]
