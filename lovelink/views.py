@@ -108,15 +108,15 @@ def personInfoIn(request):
                 tx_hash=tx_hash
             )
         ]
-        resultList = db.update(docs)
-        updateNum = 0
-        for item in resultList:
-            if (item[0]):
-                updateNum += 1
-            else:
-                print('%s db[%s]' % (item[2], item[1]))
-        print('%s update successfully\n' % updateNum)
-        print('===has saved===')
+        # resultList = db.update(docs)
+        # updateNum = 0
+        # for item in resultList:
+        #     if (item[0]):
+        #         updateNum += 1
+        #     else:
+        #         print('%s db[%s]' % (item[2], item[1]))
+        # print('%s update successfully\n' % updateNum)
+        # print('===has saved===')
         return HttpResponse('Person Information have saved, hash code: '+tx_hash)
     else:
         return HttpResponse(False)
