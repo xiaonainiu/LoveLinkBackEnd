@@ -93,8 +93,8 @@ def personInfoIn(request):
     if(request.method == 'POST'):
 
         concat = request.POST
-        print (concat['text'])
-        print (concat['username'])
+        print ('text: ' + concat['text'])
+        print ('username: '+concat['username'])
         text = concat['text']
         name = concat['username']
         tx_hash = transction(text,name)
