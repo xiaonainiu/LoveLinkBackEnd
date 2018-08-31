@@ -90,6 +90,7 @@ def personId(request):
     return HttpResponse(False)
 @csrf_exempt
 def personInfoIn(request):
+    print('=====personInfoIn start=====')
     if(request.method == 'POST'):
 
         concat = request.POST
@@ -120,6 +121,7 @@ def personInfoIn(request):
         #         print('%s db[%s]' % (item[2], item[1]))
         # print('%s update successfully\n' % updateNum)
         # print('===has saved===')
+        print('=====personInfoIn end=====')
         return HttpResponse('Person Information have saved, hash code: '+tx_hash)
     else:
         return HttpResponse(False)
