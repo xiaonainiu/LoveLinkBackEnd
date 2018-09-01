@@ -94,11 +94,12 @@ def personInfoIn(request):
     if(request.method == 'POST'):
 
         concat = request.POST
+        print('concat:',concat)
         print ('text: ' + concat['text'])
         print ('username: '+concat['username'])
         text = concat['text']
         name = concat['username']
-        tx_hash = transction(text,name)
+#         tx_hash = transction(text,name)
         docs = [
             dict(
                 username=concat['username'],
