@@ -123,7 +123,7 @@ def personInfoIn(request):
         # print('%s update successfully\n' % updateNum)
         # print('===has saved===')
         print('=====personInfoIn end=====')
-        return HttpResponse('Person Information have saved, hash code: '+tx_hash)
+        return HttpResponse(tx_hash)
     else:
         return HttpResponse(False)
 
@@ -149,12 +149,12 @@ def transction(text,name):
   priv_key = env_dist['BLOCK_KEY'] #爱链的eth账户的私钥
   account = Account.privateKeyToAccount(priv_key) #通过私钥得到公钥也就是账户地址
   nonce = w3.eth.getTransactionCount(account.address) #通) #通过返回指定地址发起的交易数，得到防止重放攻击的数字
-  data=Web3.toHex(str.encode(text+'--'+name))#交易附加的信息，需要将字符串转换为16进制编码，需要前端传递来需要保存的数据
+  data=Web3.toHex(str.encode(text+'——'+name))#交易附加的信息，需要将字符串转换为16进制编码，需要前端传递来需要保存的数据
   payload = {
     'to':  '0x8Fe2Af03Ed1d362371261AB33C400F24fBB82D8f',
     'value': 0,
     'gas': 200000,           #运算步数的上限
-    'gasPrice': Web3.toWei(6,'gwei'),#每一步运算耗费的Eth
+    'gasPrice': Web3.toWei(3,'gwei'),#每一步运算耗费的Eth
     'nonce': nonce,
     'data':data
   }
@@ -164,6 +164,7 @@ def transction(text,name):
   tx_hash = w3.eth.sendRawTransaction(signed.rawTransaction)#生成裸交易，得到交易号
   # receipt = w3.eth.waitForTransactionReceipt(tx_hash) #通过交易号得到交易的信息，一般需要等1分钟
   print('hash: '+tx_hash)
+  tx_hash=''.join(['%02x'%b for b in tx_hash])
   return tx_hash
 
 def get_nonce_str():
