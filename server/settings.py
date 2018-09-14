@@ -129,9 +129,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-INSTALLED_APPS = [ 'mongoengine', ]
-MONGODB_DATABASES = { "default": { "name": "test", "host": '127.0.0.1', "tz_aware": True, # 设置时区 }, 
-DATABASES = { 'default': { 'ENGINE': 'django.db.backends.dummy' } } 
-from mongoengine import connect connect('test', host='127.0.0.1') 
+# INSTALLED_APPS = [ 'mongoengine', ]
+# MONGODB_DATABASES = { "default": { "name": "test", "host": '127.0.0.1', "tz_aware": True, # 设置时区 }, 
+# DATABASES = { 'default': { 'ENGINE': 'django.db.backends.dummy' } } 
+# from mongoengine import connect connect('test', host='127.0.0.1') 
 
 
