@@ -87,6 +87,7 @@ DATABASES = {
         'ENGINE': None, # 把默认的数据库连接至为None
     }
 }
+
 from mongoengine import connect
 connect('oath') # 连接的数据库名称
 
