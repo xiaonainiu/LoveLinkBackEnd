@@ -4,7 +4,7 @@ from django.core.handlers.wsgi import WSGIRequest
 import json
 import requests
 from django.views.decorators.csrf import csrf_exempt
-import couchdb
+from mongoengine import *
 import os
 
 ##web3
@@ -21,12 +21,27 @@ import time
 # Create your views here.
 
 
-# Define couch db
-server = couchdb.Server('http://localhost:5984')
-db = server['lovechain_test']
+# Define mongodb
+connect('oath')
 
 # Define os environment
 env_dist = os.environ
+
+#Define data structure
+class oath(Document):
+    """ 誓言 """
+    meta = {
+        'collection': 'oath',  # 定义集合名称
+    }
+
+    username = StringField(max_length=32, required=True)  # max_length最大长度，required=True 不能不填写
+    oathTitle=StringField()
+    text = StringField()
+    openid=StringField()
+    avatarUrl=StringField()
+    image=StringField()
+    tx_hash=StringField()
+    time=StringField()
 
 def index(request):
     return HttpResponse('Hello,world')
@@ -113,6 +128,16 @@ def personInfoIn(request):
                 tx_hash=tx_hash
             )
         ]
+        oath_obj=oath(
+        username=username
+        text=text
+        oathTitle=oathTitle
+        image=image
+        avatarUrl=avatarUrl
+        openid=openid
+        tx_hash=tx_hash
+        )
+        oath_obj.save()
         # resultList = db.update(docs)
         # updateNum = 0
         # for item in resultList:
