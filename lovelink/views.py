@@ -34,9 +34,9 @@ class oath(Document):
         'collection': 'oath',  # 定义集合名称
     }
 
-    username = StringField(max_length=32, required=True)  # max_length最大长度，required=True 不能不填写
+    name = StringField(max_length=32, required=True)  # max_length最大长度，required=True 不能不填写
     oathTitle=StringField()
-    text = StringField()
+    oathText = StringField()
     openid=StringField()
     avatarUrl=StringField()
     image=StringField()
@@ -129,8 +129,8 @@ def personInfoIn(request):
             )
         ]
         oath_obj=oath(
-        username=username
-        text=text
+        name=username
+        oathtext=text
         oathTitle=oathTitle
         image=image
         avatarUrl=avatarUrl
