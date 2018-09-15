@@ -102,6 +102,7 @@ def personInfoIn(request):
         text = concat['text']
         name = concat['username']
 #         tx_hash = transction(text,name)
+        tx_hash=1
         docs = [
             dict(
                 username=concat['username'],
