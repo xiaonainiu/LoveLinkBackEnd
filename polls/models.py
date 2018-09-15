@@ -30,3 +30,19 @@
 #   @queryset_manager def show_newest(doc_cls, queryset): 
 #   # 通过openid降序显示
 #   return queryset.order_by('-openid') 
+from mongoengine import *
+#Define data structure
+class oath(Document):
+    """ 誓言 """
+    meta = {
+        'collection': 'oath',  # 定义集合名称
+    }
+
+    name = StringField(max_length=32, required=True)  # max_length最大长度，required=True 不能不填写
+    oathTitle=StringField()
+    oathText = StringField()
+    openid=StringField()
+    avatarUrl=StringField()
+    image=StringField()
+    tx_hash=StringField()
+    time=StringField()
