@@ -5,7 +5,7 @@ import json
 import requests
 from django.views.decorators.csrf import csrf_exempt
 from mongoengine import *
-# from polls.models import oath
+from polls.models import oath
 import os
 
 ##web3
@@ -115,16 +115,16 @@ def personInfoIn(request):
                 tx_hash=tx_hash
             )
         ]
-#         oath_obj=oath(
-#         name=username,
-#         oathtext=text,
-#         oathTitle=oathTitle,
-#         image=image,
-#         avatarUrl=avatarUrl,
-#         openid=openid,
-#         tx_hash=tx_hash,
-#         )
-#         oath_obj.save()
+        oath_obj=oath(
+        name=username,
+        oathtext=text,
+        oathTitle=oathTitle,
+        image=image,
+        avatarUrl=avatarUrl,
+        openid=openid,
+        tx_hash=tx_hash,
+        )
+        oath_obj.save()
         # resultList = db.update(docs)
         # updateNum = 0
         # for item in resultList:
