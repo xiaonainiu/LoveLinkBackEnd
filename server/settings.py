@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from mongoengine import connect 
+connect('oath', host='127.0.0.1') 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -133,7 +135,5 @@ STATIC_URL = '/static/'
 INSTALLED_APPS = [ 'mongoengine', ]
 MONGODB_DATABASES = { "default": { "name": "oath", "host": '127.0.0.1', "tz_aware": True, # 设置时区 }, 
 
-from mongoengine import connect 
-connect('oath', host='127.0.0.1') 
 
 
