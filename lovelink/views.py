@@ -118,7 +118,7 @@ def personInfoIn(request):
         ]
         oath_obj=oath(
         name==concat['username'],
-        oathtext=concat['text'],
+        oathText=concat['text'],
         oathTitle=concat['oathTitle'],
         image=concat['image'],
         time=concat['time'],
