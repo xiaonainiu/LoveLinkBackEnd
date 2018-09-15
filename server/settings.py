@@ -132,6 +132,7 @@ STATIC_URL = '/static/'
 INSTALLED_APPS = [ 'mongoengine', ]
 MONGODB_DATABASES = { "default": { "name": "oath", "host": '127.0.0.1', "tz_aware": True, # 设置时区 }, 
 DATABASES = { 'default': { 'ENGINE': 'django.db.backends.dummy' } } 
-from mongoengine import connect connect('oath', host='127.0.0.1') 
+from mongoengine import connect 
+connect('oath', host='127.0.0.1') 
 
 
