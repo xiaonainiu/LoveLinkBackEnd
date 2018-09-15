@@ -27,21 +27,7 @@ connect('oath')
 # Define os environment
 env_dist = os.environ
 
-#Define data structure
-class oath(Document):
-    """ 誓言 """
-    meta = {
-        'collection': 'oath',  # 定义集合名称
-    }
 
-    name = StringField(max_length=32, required=True)  # max_length最大长度，required=True 不能不填写
-    oathTitle=StringField()
-    oathText = StringField()
-    openid=StringField()
-    avatarUrl=StringField()
-    image=StringField()
-    tx_hash=StringField()
-    time=StringField()
 
 def index(request):
     return HttpResponse('Hello,world')
