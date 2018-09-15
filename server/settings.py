@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'lovelink',
     'oath',
+    'mongoengine',
 ]
 
 MIDDLEWARE = [
