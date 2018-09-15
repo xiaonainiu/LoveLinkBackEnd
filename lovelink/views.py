@@ -119,7 +119,7 @@ def personInfoIn(request):
         oath_obj=oath(
         name==concat['username'],
         oathtext=concat['text'],
-        oathTitle=oathTitle,
+        oathTitle=concat['oathTitle'],
         image=concat['image'],
         time=concat['time'],
         avatarUrl=concat['avatarUrl'],
