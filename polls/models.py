@@ -38,7 +38,7 @@ class oath(Document):
         'collection': 'oath',  # 定义集合名称
     }
 
-    name = StringField(max_length=32, required=True)  # max_length最大长度，required=True 不能不填写
+    name = StringField(max_length=32)  # max_length最大长度，required=True 不能不填写
     oathTitle=StringField()
     oathText = StringField()
     openid=StringField()
