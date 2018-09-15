@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lovelink',
-    'oath',
     'mongoengine',
 ]
 
