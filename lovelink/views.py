@@ -116,13 +116,13 @@ def personInfoIn(request):
             )
         ]
         oath_obj=oath(
-        name=username
-        oathtext=text
-        oathTitle=oathTitle
-        image=image
-        avatarUrl=avatarUrl
-        openid=openid
-        tx_hash=tx_hash
+        name=username,
+        oathtext=text,
+        oathTitle=oathTitle,
+        image=image,
+        avatarUrl=avatarUrl,
+        openid=openid,
+        tx_hash=tx_hash,
         )
         oath_obj.save()
         # resultList = db.update(docs)
