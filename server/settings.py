@@ -87,6 +87,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 #         'ENGINE': None, # 把默认的数据库连接至为None
 #     }
 # }
+DATABASES={ 'default': { 'ENGINE': 'django.db.backends.dummy' } } 
 
 from mongoengine import connect
 connect('oath') # 连接的数据库名称
@@ -131,7 +132,7 @@ STATIC_URL = '/static/'
 
 INSTALLED_APPS = [ 'mongoengine', ]
 MONGODB_DATABASES = { "default": { "name": "oath", "host": '127.0.0.1', "tz_aware": True, # 设置时区 }, 
-DATABASES = { 'default': { 'ENGINE': 'django.db.backends.dummy' } } 
+
 from mongoengine import connect 
 connect('oath', host='127.0.0.1') 
 
