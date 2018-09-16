@@ -143,8 +143,9 @@ def personInfoIn(request):
         #         print('%s db[%s]' % (item[2], item[1]))
         # print('%s update successfully\n' % updateNum)
         # print('===has saved===')
+        info=[list(tx_hash,pNum)]
         print('=====personInfoIn end=====')
-        return HttpResponse(tx_hash)
+        return HttpResponse(info)
     else:
         return HttpResponse(False)
 
