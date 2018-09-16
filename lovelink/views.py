@@ -131,7 +131,7 @@ def personInfoIn(request):
         print('oath-obj',type(oath_obj))
         oath_obj.save()
         a=0
-        for oath in oath.objects:
+        for oath_num in oath.objects:
             a=a+1
         print(a)    
         # resultList = db.update(docs)
