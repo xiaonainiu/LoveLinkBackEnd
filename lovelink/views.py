@@ -144,6 +144,7 @@ def personInfoIn(request):
         # print('%s update successfully\n' % updateNum)
         # print('===has saved===')
         info=[dict(tx_hash,pNum)]
+        print(info)
         print('=====personInfoIn end=====')
         return HttpResponse(info)
     else:
