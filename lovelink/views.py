@@ -105,19 +105,7 @@ def personInfoIn(request):
         name = concat['username']
 #         tx_hash = transction(text,name)
         tx_hash="hash num"
-        docs = [
-            dict(
-                username=concat['username'],
-                text=concat['text'],
-                oathTitle=concat['oathTitle'],
-                # blockNum=concat['blockNum'],
-                image=concat['image'],
-                time=concat['time'],
-                avatarUrl=concat['avatarUrl'],
-                openid=concat['openid'],
-                tx_hash=tx_hash
-            )
-        ]
+    
         oath_obj=oath(
         name=concat['username'],
         oathText=concat['text'],
@@ -133,7 +121,21 @@ def personInfoIn(request):
         pNum=0
         for oath_num in oath.objects:
             pNum=pNum+1
-        print(pNum)    
+        print(pNum)  
+            docs = [
+            dict(
+                username=concat['username'],
+                text=concat['text'],
+                oathTitle=concat['oathTitle'],
+                # blockNum=concat['blockNum'],
+                image=concat['image'],
+                time=concat['time'],
+                avatarUrl=concat['avatarUrl'],
+                openid=concat['openid'],
+                pNum=pNum,
+                tx_hash=tx_hash
+            )
+        ]
         # resultList = db.update(docs)
         # updateNum = 0
         # for item in resultList:
@@ -167,7 +169,9 @@ def personInfoOut(request):
         r=[]
         for i in results:
             print(i.name)
-            r.append(i.data)
+            r.append(i.name)
+            r.append(i.oathText)
+            r.append(i.time)
         print('results',r)
        
         print('=====personInfoOut end=====')
