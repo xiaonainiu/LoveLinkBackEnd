@@ -164,7 +164,7 @@ def personInfoOut(request):
       
         print(openid)
         results = oath.objects(openid=concat['openid'])
-        print(results)
+        print('results',eval(results))
        
         print('=====personInfoOut end=====')
         return HttpResponse(results)
