@@ -122,7 +122,7 @@ def personInfoIn(request):
         for oath_num in oath.objects:
             pNum=pNum+1
         print(pNum)  
-            docs = [
+        docs = [
             dict(
                 username=concat['username'],
                 text=concat['text'],
