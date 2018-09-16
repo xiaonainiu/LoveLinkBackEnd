@@ -158,11 +158,12 @@ def personInfoOut(request):
         concat = request.GET
         print(openid)
         results = oath.objects(openid=concat['openid'])
+        print(results)
        
         print('=====personInfoOut end=====')
-        return HttpResponse(results)
-    else:
-        return HttpResponse(False)
+#         return HttpResponse(results)
+#     else:
+#         return HttpResponse(False)
 
 def transction(text,name):
   w3=Web3(Web3.HTTPProvider('https://mainnet.infura.io/9dhHYFuxJixnXwEdnwIy '))#连接到Eth的远程节点
