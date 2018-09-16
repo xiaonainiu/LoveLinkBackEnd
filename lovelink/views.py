@@ -104,7 +104,7 @@ def personInfoIn(request):
         print('typeid',type(concat['openid']))
         name = concat['username']
 #         tx_hash = transction(text,name)
-        tx_hash=1
+        tx_hash='hash num'
         docs = [
             dict(
                 username=concat['username'],
@@ -120,17 +120,20 @@ def personInfoIn(request):
         ]
         oath_obj=oath(
         name=concat['username'],
-#              name='concatusername',
         oathText=concat['text'],
         oathTitle=concat['oathTitle'],
         image=concat['image'],
         time=concat['time'],
         avatarUrl=concat['avatarUrl'],
         openid=concat['openid'],
-        tx_hash='tx_hash',
+        tx_hash=tx_hash,
         )
         print('oath-obj',type(oath_obj))
         oath_obj.save()
+        a=0
+        for oath in oath.objects:
+            a=a+1
+        print(a)    
         # resultList = db.update(docs)
         # updateNum = 0
         # for item in resultList:
