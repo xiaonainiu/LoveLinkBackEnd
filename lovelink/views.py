@@ -164,6 +164,7 @@ def personInfoOut(request):
       
         print(openid)
         results = oath.objects(openid=concat['openid'])
+        var r=''
         for i in results:
             r.append(eval(i))
         print('results',r)
