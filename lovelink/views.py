@@ -130,10 +130,10 @@ def personInfoIn(request):
         )
         print('oath-obj',type(oath_obj))
         oath_obj.save()
-        a=0
+        pNum=0
         for oath_num in oath.objects:
-            a=a+1
-        print(a)    
+            pNum=pNum+1
+        print(pNum)    
         # resultList = db.update(docs)
         # updateNum = 0
         # for item in resultList:
@@ -150,16 +150,14 @@ def personInfoIn(request):
 
 @csrf_exempt
 def personInfoOut(request):
-    if(request.method == 'POST'):
+    if(request.method == 'GET'):
         # print(request.environ)
         # for k, v in request.environ.items():
         #     print(k,v)
         print('=====personInfoOut start=====')
-        concat = request.POST
-        results = db.view('byWechetId/byWechetId', keys=[concat['username']])
-        for row in results:
-            dic = row.value
-            print(dic)
+        concat = request.GET
+        results = oath.objects(openid=concat)
+       
         print('=====personInfoOut end=====')
         return HttpResponse(results)
     else:
