@@ -166,7 +166,7 @@ def personInfoOut(request):
         results = oath.objects(openid=concat['openid'])
         r=[]
         for i in results:
-            r.append(i.data)
+            r.append(i.oath)
         print('results',r)
        
         print('=====personInfoOut end=====')
