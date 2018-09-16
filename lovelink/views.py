@@ -104,7 +104,7 @@ def personInfoIn(request):
         print('typeid',type(concat['openid']))
         name = concat['username']
 #         tx_hash = transction(text,name)
-        tx_hash='hash num'
+        tx_hash="hash num"
         docs = [
             dict(
                 username=concat['username'],
