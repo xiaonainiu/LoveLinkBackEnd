@@ -46,4 +46,4 @@ class oath(Document):
     image=StringField()
     tx_hash=StringField()
     time=StringField()
-    pNum=intField()
+    pNum=IntField()
