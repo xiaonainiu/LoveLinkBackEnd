@@ -127,7 +127,7 @@ def personInfoIn(request):
 #         time=concat['time'],
 #         avatarUrl=concat['avatarUrl'],
 #         openid=concat['openid'],
-        tx_hash=tx_hash,
+        tx_hash='tx_hash',
         )
         print('oath-obj',type(oath_obj))
         oath_obj.save()
