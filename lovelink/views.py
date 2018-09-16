@@ -150,13 +150,14 @@ def personInfoIn(request):
 
 @csrf_exempt
 def personInfoOut(request):
-    if(request.method == 'GET'):
-        # print(request.environ)
-        # for k, v in request.environ.items():
-        #     print(k,v)
+    if (request.method == 'POST'):
+      
+        concat = request.POST
+        openid = concat['openid']
         print('=====personInfoOut start=====')
         concat = request.GET
-        results = oath.objects(openid=concat)
+        print(openid)
+        results = oath.objects(openid=concat['openid'])
        
         print('=====personInfoOut end=====')
         return HttpResponse(results)
