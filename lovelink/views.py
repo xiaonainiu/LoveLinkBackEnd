@@ -146,7 +146,7 @@ def personInfoIn(request):
 #         info=dict([[tx_hash,1],[pNum,2]])
 #         print('list',list[tx_hash,pNum])
 
-        info=[{'hash':tx_hash,'num':pNum}]
+        info=[{"hash":tx_hash,"num":pNum}]
         print('info',info)
         print('=====personInfoIn end=====')
         return HttpResponse(info)
