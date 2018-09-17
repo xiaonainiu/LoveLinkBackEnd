@@ -168,10 +168,12 @@ def personInfoOut(request):
         results = oath.objects(openid=concat['openid'])
         r=[]
         for i in results:
-            print(i.name)
-            r.append(i.name)
-            r.append(i.oathText)
-            r.append(i.time)
+            a=to_json(i.name,i.oathText)
+            r.append(a)
+#             print(i.name)
+#             r.append(i.name)
+#             r.append(i.oathText)
+#             r.append(i.time)
         print('results',r)
        
         print('=====personInfoOut end=====')
