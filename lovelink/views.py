@@ -105,7 +105,9 @@ def personInfoIn(request):
         name = concat['username']
 #         tx_hash = transction(text,name)
         tx_hash="hash num"
-    
+        pNum=0
+        for oath_num in oath.objects:
+            pNum=pNum+1
         oath_obj=oath(
         name=concat['username'],
         oathText=concat['text'],
@@ -114,13 +116,14 @@ def personInfoIn(request):
         time=concat['time'],
         avatarUrl=concat['avatarUrl'],
         openid=concat['openid'],
+        pNum=pNum
         tx_hash=tx_hash,
         )
         print('oath-obj',type(oath_obj))
         oath_obj.save()
-        pNum=0
-        for oath_num in oath.objects:
-            pNum=pNum+1
+#         pNum=0
+#         for oath_num in oath.objects:
+#             pNum=pNum+1
         print(pNum)  
         docs = [
             dict(
@@ -148,7 +151,7 @@ def personInfoIn(request):
 #         info=dict([[tx_hash,1],[pNum,2]])
 #         print('list',list[tx_hash,pNum])
 
-        info=[{"hash":tx_hash,"num":pNum}]
+        info=[{"hash":tx_hash,"num":pNum+1}]
         print('info',info)
         print('=====personInfoIn end=====')
         return HttpResponse(info)
