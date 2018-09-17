@@ -168,7 +168,7 @@ def personInfoOut(request):
         results = oath.objects(openid=concat['openid'])
         r=[]
         for i in results:
-            a={'name':(i.name),'oathText':i.oathText}
+            a={'name':(i.name),'oathText':i.oathText,'image':i.image,'oathTitle':i.oathTitle}
             r.append(a)
 #             print(i.name)
 #             r.append(i.name)
@@ -177,7 +177,7 @@ def personInfoOut(request):
         print('results',r)
        
         print('=====personInfoOut end=====')
-        return HttpResponse(results)
+        return HttpResponse(r)
     else:
         return HttpResponse(False)
 
