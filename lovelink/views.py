@@ -168,7 +168,7 @@ def personInfoOut(request):
         results = oath.objects(openid=concat['openid'])
         r=[]
         for i in results:
-            a=toJson(i.name,i.oathText)
+            a={'name':(i.name),'oathText':i.oathText}
             r.append(a)
 #             print(i.name)
 #             r.append(i.name)
