@@ -135,7 +135,7 @@ def personInfoIn(request):
                 time=concat['time'],
                 avatarUrl=concat['avatarUrl'],
                 openid=concat['openid'],
-                pNum=pNum,
+                pNum=pNum+1,
                 tx_hash=tx_hash
             )
         ]
