@@ -200,7 +200,7 @@ def transction(text,name):
   # print(estimation)
   tx_hash = w3.eth.sendRawTransaction(signed.rawTransaction)#生成裸交易，得到交易号
   # receipt = w3.eth.waitForTransactionReceipt(tx_hash) #通过交易号得到交易的信息，一般需要等1分钟
-  print('hash: '+tx_hash)
+ # print('hash: '+tx_hash)
   tx_hash=''.join(['%02x'%b for b in tx_hash])
   return tx_hash
 
