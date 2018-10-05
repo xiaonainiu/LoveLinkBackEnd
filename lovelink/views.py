@@ -103,8 +103,8 @@ def personInfoIn(request):
         print('typestr',type(text))
         print('typeid',type(concat['openid']))
         name = concat['username']
-#         tx_hash = transction(text,name)
-        tx_hash="hash num"
+        tx_hash = transction(text,name)
+#         tx_hash="hash num"
         pNum=0
         for oath_num in oath.objects:
             pNum=pNum+1
@@ -121,9 +121,6 @@ def personInfoIn(request):
         )
         print('oath-obj',type(oath_obj))
         oath_obj.save()
-#         pNum=0
-#         for oath_num in oath.objects:
-#             pNum=pNum+1
         print(pNum)  
         docs = [
             dict(
