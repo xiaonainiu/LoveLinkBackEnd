@@ -79,8 +79,8 @@ def personId(request):
         concat = request.POST
         code = concat['code']
         print('code: '+code)
-        appid = 'wx04c066bae099852d'
-        secret = 'ba56b017bb62f22f2de6a5f3b9171679'
+        appid = env_dist['appid']
+        secret = env_dist['secret']
         requestString = 'https://api.weixin.qq.com/sns/jscode2session?appid={APPID}&secret={SECRET}&js_code={JSCODE}&grant_type=authorization_code'.format(
             APPID=appid, SECRET=secret, JSCODE=code)
         r = requests.get(requestString)
