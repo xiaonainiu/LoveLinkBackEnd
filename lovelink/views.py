@@ -253,7 +253,7 @@ def prepay(openid):
     }
     stringA = '&'.join(["{0}={1}".format(k, data.get(k)) for k in sorted(data)])
     # print(stringA)
-    merchant_key = 'interestact1tink134kaoyan5216tin'
+    merchant_key = env_dist['merchant_key']
     stringSignTemp = '{0}&key={1}'.format(stringA, merchant_key)
     # print(stringSignTemp)
     stringSignTemp = stringSignTemp.encode("utf8")
