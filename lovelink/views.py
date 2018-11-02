@@ -186,7 +186,8 @@ def transction(text,name):
   priv_key = env_dist['BLOCK_KEY'] #爱链的eth账户的私钥
   account = Account.privateKeyToAccount(priv_key) #通过私钥得到公钥也就是账户地址
   nonce = w3.eth.getTransactionCount(account.address) #通) #通过返回指定地址发起的交易数，得到防止重放攻击的数字
-  data=Web3.toHex(str.encode(text+'——'+name))#交易附加的信息，需要将字符串转换为16进制编码，需要前端传递来需要保存的数据
+ # data=Web3.toHex(str.encode(text+'——'+name))#交易附加的信息，需要将字符串转换为16进制编码，需要前端传递来需要保存的数据
+  data=Web3.toHex(str.encode(text+'   '+name))
   payload = {
     'to':  '0x8Fe2Af03Ed1d362371261AB33C400F24fBB82D8f',
     'value': 0,
